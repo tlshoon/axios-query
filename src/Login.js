@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { instance } from "./http/Base";
 import { useMutation } from "react-query";
+import { useStore } from "./store/store";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const { email, setEmail, password, setPassword } = useStore();
 
   const login = async () => {
     const req = await instance.post("/api/register", {
@@ -16,21 +16,21 @@ const Login = () => {
 
   const loginMutation = useMutation(login, {
     onSuccess: (data) => {
-        console.log(data)
+      console.log(data);
     },
     onError: (error) => {
-      console.log(error)
+      console.log(error);
     },
   });
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    loginMutation.mutate();
+  };
+
   return (
     <>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          loginMutation.mutate();
-        }}
-      >
+      <form onSubmit={handleSubmit}>
         <input
           type="email"
           placeholder="email"
@@ -45,9 +45,7 @@ const Login = () => {
         {loginMutation.isError && (
           <div>Error: {loginMutation.error.message}</div>
         )}
-        {loginMutation.isLoading && (
-          <div>로딩중...</div>
-        )}
+        {loginMutation.isLoading && <div>로딩중...</div>}
         {loginMutation.isSuccess && (
           <div>{JSON.stringify(loginMutation.data.token)}</div>
         )}
