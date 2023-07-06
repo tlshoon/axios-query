@@ -62,6 +62,7 @@ function App() {
           ))}
       </div>
       <button onClick={() => postUserMutation.mutate()}>Post User</button>
+      {postUserMutation.isSuccess && <div>{JSON.stringify(postUserMutation.data.createdAt)}</div>}
     </div>
   );
 }
