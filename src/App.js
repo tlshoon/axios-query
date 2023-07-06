@@ -53,16 +53,16 @@ function App() {
         {userData &&
           userData.map((user) => <li key={user.id}>{user.email}</li>)}
       </ul>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-start" }}>
         {delayData &&
           delayData.map((user) => (
             <div key={user.id}  style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", margin: "10px" }}>
-              <img src={user.avatar} alt={user.first_name}  style={{ width: "100px", height: "100px" }}/>
+              <img src={user.avatar} alt={user.first_name}  style={{ width: "40px", height: "40px" }}/>
             </div>
           ))}
       </div>
       <button onClick={() => postUserMutation.mutate()}>Post User</button>
-      {postUserMutation.isSuccess && <div>{JSON.stringify(postUserMutation.data.createdAt)}</div>}
+      {postUserMutation.isSuccess && <div>{postUserMutation.data.createdAt}</div>}
     </div>
   );
 }
