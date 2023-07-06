@@ -19,7 +19,7 @@ const Login = () => {
       console.log(data);
     },
     onError: (error) => {
-      console.log(error);
+      console.log("로그인 실패 :", error.message);
     },
   });
 
@@ -40,6 +40,8 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     loginMutation.mutate();
+    setEmail("");
+    setPassword("");
   };
 
   return (
@@ -48,10 +50,13 @@ const Login = () => {
         <input
           type="email"
           placeholder="email"
-          onChange={(e) => setEmail(e.target.value)}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)
+        }
         />
         <input
           type="password"
+          value={password}
           placeholder="password"
           onChange={(e) => setPassword(e.target.value)}
         />
@@ -61,16 +66,14 @@ const Login = () => {
         )}
         {loginMutation.isLoading && <div>로딩중...</div>}
         {loginMutation.isSuccess && (
-          <div>{JSON.stringify(loginMutation.data.token)}</div>
+          <div>{loginMutation.data.token}</div>
         )}
       </form>
       <button onClick={() => deleteMutation.mutate()}>삭제</button>
       {deleteMutation.isError && (
         <div>Error: {deleteMutation.error.message}</div>
       )}
-      {deleteMutation.isSuccess && (
-        <div>삭제 성공</div>
-      )}
+      {deleteMutation.isSuccess && <div>삭제 성공</div>}
     </>
   );
 };
