@@ -7,6 +7,7 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import Login from "./Login";
 import TodoList from "./TodoList";
 import Dynamic from "./Dynamic";
+import DynamicPhoto from "./DynamicPhoto";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -19,6 +20,7 @@ root.render(
       <Login />
       <TodoList />
       <Dynamic />
+      <DynamicPhoto />
       <ReactQueryDevtools />
     </QueryClientProvider>
   </React.StrictMode>
