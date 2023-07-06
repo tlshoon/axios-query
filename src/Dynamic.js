@@ -28,7 +28,7 @@ const Dynamic = () => {
           type="number"
           value={num}
           onChange={(e) => setNum(e.target.value)}
-          placeholder="숫자를 입력해주세요"
+          placeholder="숫자를 입력하면 이름을 가져옵니다."
         />
       </form>
       {isLoading && <p>Loading...</p>}
