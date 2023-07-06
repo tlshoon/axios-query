@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import Login from "./Login";
 import TodoList from "./TodoList";
+import Dynamic from "./Dynamic";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -17,6 +18,7 @@ root.render(
       <App />
       <Login />
       <TodoList />
+      <Dynamic />
       <ReactQueryDevtools />
     </QueryClientProvider>
   </React.StrictMode>
