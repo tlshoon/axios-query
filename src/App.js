@@ -53,16 +53,15 @@ function App() {
         {userData &&
           userData.map((user) => <li key={user.id}>{user.email}</li>)}
       </ul>
-      <ul>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
         {delayData &&
           delayData.map((user) => (
-            <li key={user.id}>
-              <img src={user.avatar} alt={user.first_name} />
-            </li>
+            <div key={user.id}  style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", margin: "10px" }}>
+              <img src={user.avatar} alt={user.first_name}  style={{ width: "100px", height: "100px" }}/>
+            </div>
           ))}
-      </ul>
+      </div>
       <button onClick={() => postUserMutation.mutate()}>Post User</button>
-      {postUserMutation.isSuccess ? <div>User posted successfully: {JSON.stringify(postUserMutation.data.name)}</div> : null}
     </div>
   );
 }
