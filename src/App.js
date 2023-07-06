@@ -26,7 +26,7 @@ function App() {
     isLoading: userLoading,
     isError: userError,
     error: userErrorDetails,
-  } = useQuery("users", fetchUser);   // 컴포넌트가 마운트 될 때 캐시에 users가 있는지 확인하고 없으면 바로 실행
+  } = useQuery("users", fetchUser);  // 컴포넌트가 마운트 될 때 캐시에 users가 있는지 확인하고 없으면 바로 실행
   const {
     data: delayData,
     isLoading: delayLoading,
@@ -53,16 +53,37 @@ function App() {
         {userData &&
           userData.map((user) => <li key={user.id}>{user.email}</li>)}
       </ul>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-start" }}>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "flex-start",
+        }}
+      >
         {delayData &&
           delayData.map((user) => (
-            <div key={user.id}  style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", margin: "10px" }}>
-              <img src={user.avatar} alt={user.first_name}  style={{ width: "40px", height: "40px" }}/>
+            <div
+              key={user.id}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                margin: "10px",
+              }}
+            >
+              <img
+                src={user.avatar}
+                alt={user.first_name}
+                style={{ width: "40px", height: "40px" }}
+              />
             </div>
           ))}
       </div>
       <button onClick={() => postUserMutation.mutate()}>Post User</button>
-      {postUserMutation.isSuccess && <div>{postUserMutation.data.createdAt}</div>}
+      {postUserMutation.isSuccess && (
+        <div>{postUserMutation.data.createdAt}</div>
+      )}
     </div>
   );
 }
