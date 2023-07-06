@@ -7,7 +7,7 @@ const Login = () => {
   const { email, setEmail, password, setPassword } = useStore();
 
   const login = async () => {
-    const req = await instance.post("/api/register", {
+    const req = await instance.post("/api/login", {
       email,
       password,
     });
@@ -20,6 +20,20 @@ const Login = () => {
     },
     onError: (error) => {
       console.log(error);
+    },
+  });
+
+  const userDelete = async () => {
+    const req = await instance.delete("/api/users/2");
+    return req.data;
+  };
+
+  const deleteMutation = useMutation(userDelete, {
+    onSuccess: () => {
+      console.log("데이터 삭제");
+    },
+    onError: (error) => {
+      console.log("삭제 에러: ", error.message);
     },
   });
 
@@ -50,6 +64,13 @@ const Login = () => {
           <div>{JSON.stringify(loginMutation.data.token)}</div>
         )}
       </form>
+      <button onClick={() => deleteMutation.mutate()}>삭제</button>
+      {deleteMutation.isError && (
+        <div>Error: {deleteMutation.error.message}</div>
+      )}
+      {deleteMutation.isSuccess && (
+        <div>삭제 성공</div>
+      )}
     </>
   );
 };
